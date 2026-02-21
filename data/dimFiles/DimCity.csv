@@ -1,0 +1,4 @@
+Id,Name,Latitude,Longitude,Province,Region,Country,CreatedAt,UpdatedAt
+1,Milano,45.4642,9.19,Milano,Lombardia,Italy,2/20/2026 11:00,2/20/2026 13:00
+2,Bologna,44.4949,11.3426,Bologna,Emilia-Romagna,Italy,2/20/2026 11:00,2/20/2026 13:00
+3,Cagliari,39.2238,9.1217,Cagliari,Sardegna,Italy,2/20/2026 11:00,2/20/2026 13:00

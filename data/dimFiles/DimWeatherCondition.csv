@@ -1,0 +1,56 @@
+Id,MainCondition,DetailedCondition,CreatedAt,UpdatedAt
+200,Thunderstorm,Thunderstorm With Light Rain,2/20/2026 11:00,2/20/2026 12:59
+201,Thunderstorm,Thunderstorm With Rain,2/20/2026 11:00,2/20/2026 12:59
+202,Thunderstorm,Thunderstorm With Heavy Rain,2/20/2026 11:00,2/20/2026 12:59
+210,Thunderstorm,Light Thunderstorm,2/20/2026 11:00,2/20/2026 12:59
+211,Thunderstorm,Thunderstorm,2/20/2026 11:00,2/20/2026 12:59
+212,Thunderstorm,Heavy Thunderstorm,2/20/2026 11:00,2/20/2026 12:59
+221,Thunderstorm,Ragged Thunderstorm,2/20/2026 11:00,2/20/2026 12:59
+230,Thunderstorm,Thunderstorm With Light Drizzle,2/20/2026 11:00,2/20/2026 12:59
+231,Thunderstorm,Thunderstorm With Drizzle,2/20/2026 11:00,2/20/2026 12:59
+232,Thunderstorm,Thunderstorm With Heavy Drizzle,2/20/2026 11:00,2/20/2026 12:59
+300,Drizzle,Light Intensity Drizzle,2/20/2026 11:00,2/20/2026 12:59
+301,Drizzle,Drizzle,2/20/2026 11:00,2/20/2026 12:59
+302,Drizzle,Heavy Intensity Drizzle,2/20/2026 11:00,2/20/2026 12:59
+310,Drizzle,Light Intensity Drizzle Rain,2/20/2026 11:00,2/20/2026 12:59
+311,Drizzle,Drizzle Rain,2/20/2026 11:00,2/20/2026 12:59
+312,Drizzle,Heavy Intensity Drizzle Rain,2/20/2026 11:00,2/20/2026 12:59
+313,Drizzle,Shower Rain And Drizzle,2/20/2026 11:00,2/20/2026 12:59
+314,Drizzle,Heavy Shower Rain And Drizzle,2/20/2026 11:00,2/20/2026 12:59
+321,Drizzle,Shower Drizzle,2/20/2026 11:00,2/20/2026 12:59
+500,Rain,Light Rain,2/20/2026 11:00,2/20/2026 12:59
+501,Rain,Moderate Rain,2/20/2026 11:00,2/20/2026 12:59
+502,Rain,Heavy Intensity Rain,2/20/2026 11:00,2/20/2026 12:59
+503,Rain,Very Heavy Rain,2/20/2026 11:00,2/20/2026 12:59
+504,Rain,Extreme Rain,2/20/2026 11:00,2/20/2026 12:59
+511,Rain,Freezing Rain,2/20/2026 11:00,2/20/2026 12:59
+520,Rain,Light Intensity Shower Rain,2/20/2026 11:00,2/20/2026 12:59
+521,Rain,Shower Rain,2/20/2026 11:00,2/20/2026 12:59
+522,Rain,Heavy Intensity Shower Rain,2/20/2026 11:00,2/20/2026 12:59
+531,Rain,Ragged Shower Rain,2/20/2026 11:00,2/20/2026 12:59
+600,Snow,Light Snow,2/20/2026 11:00,2/20/2026 12:59
+601,Snow,Snow,2/20/2026 11:00,2/20/2026 12:59
+602,Snow,Heavy Snow,2/20/2026 11:00,2/20/2026 12:59
+611,Snow,Sleet,2/20/2026 11:00,2/20/2026 12:59
+612,Snow,Light Shower Sleet,2/20/2026 11:00,2/20/2026 12:59
+613,Snow,Shower Sleet,2/20/2026 11:00,2/20/2026 12:59
+615,Snow,Light Rain And Snow,2/20/2026 11:00,2/20/2026 12:59
+616,Snow,Rain And Snow,2/20/2026 11:00,2/20/2026 12:59
+620,Snow,Light Shower Snow,2/20/2026 11:00,2/20/2026 12:59
+621,Snow,Shower Snow,2/20/2026 11:00,2/20/2026 12:59
+622,Snow,Heavy Shower Snow,2/20/2026 11:00,2/20/2026 12:59
+701,Mist,Mist,2/20/2026 11:00,2/20/2026 12:59
+711,Smoke,Smoke,2/20/2026 11:00,2/20/2026 12:59
+721,Haze,Haze,2/20/2026 11:00,2/20/2026 12:59
+731,Dust,Sand/Dust Whirls,2/20/2026 11:00,2/20/2026 12:59
+741,Fog,Fog,2/20/2026 11:00,2/20/2026 12:59
+751,Sand,Sand,2/20/2026 11:00,2/20/2026 12:59
+761,Dust,Dust,2/20/2026 11:00,2/20/2026 12:59
+762,Ash,Volcanic Ash,2/20/2026 11:00,2/20/2026 12:59
+771,Squall,Squalls,2/20/2026 11:00,2/20/2026 12:59
+781,Tornado,Tornado,2/20/2026 11:00,2/20/2026 12:59
+800,Clear,Clear Sky,2/20/2026 11:00,2/20/2026 12:59
+801,Clouds,Few Clouds: 11-25%,2/20/2026 11:00,2/20/2026 12:59
+802,Clouds,Scattered Clouds: 25-50%,2/20/2026 11:00,2/20/2026 12:59
+803,Clouds,Broken Clouds: 51-84%,2/20/2026 11:00,2/20/2026 12:59
+804,Clouds,Overcast Clouds: 85-100%,2/20/2026 11:00,2/20/2026 12:59
