@@ -1,6 +1,10 @@
 # Environment Setting
+import logging
 from supabase import create_client, Client
 from tqdm import tqdm
+
+# Logging Configuration
+logger = logging.getLogger(__name__)
 
 # Functions | Supabase Writing
 def WriteFactWeatherToDatabase(factWeatherDf, supabaseUrl, supabaseKey):
@@ -24,7 +28,7 @@ def WriteFactWeatherToDatabase(factWeatherDf, supabaseUrl, supabaseKey):
             response = supabase.table('FactWeather').insert(batch).execute()
         
     except Exception as e:
-        print(f'Error writing to Supabase: {e}')
+        logger.error(f'Error writing to Supabase: {e}', exc_info=True)
         raise
 
     return

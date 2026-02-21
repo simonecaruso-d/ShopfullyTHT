@@ -1,19 +1,30 @@
 # Environment Setting
 from datetime import datetime, timezone
+import logging
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 import RFApiUsageLog
+
+# Logging Configuration
+logger = logging.getLogger(__name__)
 
 # Functions | Helpers
 def FetchData(endpoint, parameters, usageLogPath):
     RFApiUsageLog.LogApiCall(endpoint, usageLogPath)
-    response = requests.get(endpoint, params=parameters)
-    if response.status_code == 200: 
+    session = requests.Session()
+    retry = Retry(total=3, backoff_factor=2, status_forcelist=[429, 500, 502, 503, 504])
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount("https://", adapter)
+    try:
+        response = session.get(endpoint, params=parameters, timeout=10)
+        response.raise_for_status()
         return response.json()
-    else:
-        print(f'API call failed for {parameters} with status {response.status_code}')
+    except requests.exceptions.RequestException as e:
+        logger.error(f'API call failed for {parameters}', exc_info=True)
         return None
-
+    
 def ParseHourlyData(hour, cityId, retrievalTime):
     weather = hour.get('weather', [{}])[0]
     

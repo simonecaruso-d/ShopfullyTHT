@@ -1,5 +1,6 @@
 # Environment Setting
 from dotenv import load_dotenv
+import logging
 import os
 from pathlib import Path
 
@@ -15,7 +16,13 @@ SupabaseKey = os.getenv('SUPABASE_KEY')
 
 # File Paths
 BaseDirectory = Path(__file__).resolve().parent
-UsageLogPath = BaseDirectory.parent / 'log' / 'ApiUsageLog.txt'
+LogPath = BaseDirectory.parent / 'log'
+UsageLogPath = LogPath / 'ApiUsageLog.txt'
+PipelineLogPath = LogPath / 'PipelineLog.txt'
+
+# Logging Configuration
+logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(name)s | %(message)s', handlers=[logging.FileHandler(PipelineLogPath), logging.StreamHandler()])
+logger = logging.getLogger('RetrieveFacts')
 
 # Endpoints
 BaseEndpoint = 'https://api.openweathermap.org/data/3.0/onecall'

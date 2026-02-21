@@ -1,6 +1,10 @@
 # Environment Setting
-from supabase import create_client, Client
+import logging
 import pandas as pd
+from supabase import create_client, Client
+
+# Logging Configuration
+logger = logging.getLogger(__name__)
 
 # Functions | Supabase Retrieval
 def GetCityTable(supaBaseUrl, supabaseKey):
@@ -11,5 +15,5 @@ def GetCityTable(supaBaseUrl, supabaseKey):
         return df
     
     except Exception as e:
-        print(f'Error connecting to Supabase: {e}')
+        logger.error(f'Error retrieving city table: {e}', exc_info=True)
         return None
