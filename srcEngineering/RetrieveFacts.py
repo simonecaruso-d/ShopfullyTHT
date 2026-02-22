@@ -26,6 +26,6 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(
 logger = logging.getLogger('RetrieveFactsPipeline')
 
 # Run
-Cities = RFReadDB.GetCityTable()
+Cities = RFReadDB.GetCityTable(SupaBaseUrl, SupabaseKey)
 FactWeather = RFCallAPI.GetForecastsAndActuals(Cities)
 RFWriteDB.WriteFactWeatherToDatabase(FactWeather)
