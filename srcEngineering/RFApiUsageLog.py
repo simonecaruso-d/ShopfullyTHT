@@ -1,13 +1,18 @@
 # Environment Setting
 from datetime import datetime
 import json
+from pathlib import Path
 
 # Functions | API Usage Tracking
 def LogApiCall(endpoint, usageLogPath):
     today = datetime.now().strftime("%Y-%m-%d")
     log = {}
 
-    with open(usageLogPath, 'r', encoding='utf-8') as file:
+    path = Path(usageLogPath)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not path.exists(): path.write_text('timestamp,endpoint\n', encoding='utf-8')
+
+    with path.open('a', encoding='utf-8') as file:
         for line in file:
             try:
                 entry = json.loads(line)
