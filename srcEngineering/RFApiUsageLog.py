@@ -1,7 +1,6 @@
 # Environment Setting
 from datetime import datetime
 import json
-from tqdm import tqdm
 
 # Functions | API Usage Tracking
 def LogApiCall(endpoint, usageLogPath):
