@@ -4,7 +4,6 @@ import pandas as pd
 from tqdm import tqdm
 
 import RFHelpers
-import RetrieveFacts
 
 # Functions | Get Fact Tables
 def GetForecast(citiesDf, owApiKey, owBaseEndpoint):
@@ -46,7 +45,7 @@ def GetHistorical(citiesDf, owApiKey, owBaseEndpoint):
     df['DataType'] = 'Actual'
     return df
 
-def GetForecastsAndActuals(citiesDf, owApiKey=RetrieveFacts.OpenWeatherApiKey, owBaseEndpoint=RetrieveFacts.OpenWeatherEndpoint):
+def GetForecastsAndActuals(citiesDf, owApiKey, owBaseEndpoint):
     forecasts = GetForecast(citiesDf, owApiKey, owBaseEndpoint)
     actuals = GetHistorical(citiesDf, owApiKey, owBaseEndpoint)
     combinedData = pd.concat([actuals, forecasts], ignore_index=True)

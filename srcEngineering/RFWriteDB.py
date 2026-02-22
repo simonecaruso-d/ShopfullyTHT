@@ -3,15 +3,11 @@ import logging
 from supabase import create_client, Client
 from tqdm import tqdm
 
-import RetrieveFacts
-
 # Logging Configuration
 logger = logging.getLogger(__name__)
 
 # Functions | Supabase Writing
-def WriteFactWeatherToDatabase(factWeatherDf, supabaseUrl=None, supabaseKey=None):
-    if supabaseUrl is None: supabaseUrl = RetrieveFacts.SupaBaseUrl
-    if supabaseKey is None: supabaseKey = RetrieveFacts.SupaKey
+def WriteFactWeatherToDatabase(factWeatherDf, supabaseUrl, supabaseKey):
     try:
         supabase: Client = create_client(supabaseUrl, supabaseKey)
         uniqueCombinations = factWeatherDf[['DataType', 'CTId', 'FullTimestamp']].drop_duplicates()
