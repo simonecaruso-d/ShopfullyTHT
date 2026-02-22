@@ -18,8 +18,8 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: DebugRequirements
-        run: cat requirements.txt
+      #- name: DebugRequirements
+        #run: cat requirements.txt
 
       - name: DependenciesInstallation
         run: |
