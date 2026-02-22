@@ -11,44 +11,44 @@ def GetForecast(citiesDf, owApiKey, owBaseEndpoint, supabaseUrl, supabaseKey):
     nowUtc = datetime.now(timezone.utc)
 
     for _, row in tqdm(citiesDf.iterrows(), total=citiesDf.shape[0], desc='Processing cities (Forecast)'):
-        lat = row['Latitude']
-        lon = row['Longitude']
-        cityId = row['Id']
+        lat        = row['Latitude']
+        lon        = row['Longitude']
+        cityId     = row['Id']
         parameters = {'lat': lat, 'lon': lon, 'units': 'metric', 'exclude': 'current,minutely,daily,alerts', 'appid': owApiKey}
 
         hourlyData = RFHelpers.FetchData(owBaseEndpoint, parameters, supabaseUrl, supabaseKey)
         for hour in hourlyData['hourly']: rows.append(RFHelpers.ParseHourlyData(hour, cityId, nowUtc))
 
-    df = pd.DataFrame(rows)
+    df             = pd.DataFrame(rows)
     df['DataType'] = 'Forecast'
     return df
 
 def GetHistorical(citiesDf, owApiKey, owBaseEndpoint, supabaseUrl, supabaseKey):
-    rows = []
+    rows   = []
     nowUtc = datetime.now(timezone.utc)
 
     for _, row in tqdm(citiesDf.iterrows(), total=citiesDf.shape[0], desc='Processing cities (Historical)'):
-        lat = row['Latitude']
-        lon = row['Longitude']
+        lat    = row['Latitude']
+        lon    = row['Longitude']
         cityId = row['Id']
 
         for daysAgo in range(1, 4):
             for hour in range(24):
-                dateTime = nowUtc - timedelta(days=daysAgo, hours=nowUtc.hour - hour)
-                timestamp = int(dateTime.timestamp())
-                endpoint = f'{owBaseEndpoint}/timemachine'
-                parameters = {'lat': lat, 'lon': lon, 'dt': timestamp, 'appid': owApiKey}
-                data = RFHelpers.FetchData(endpoint, parameters, supabaseUrl, supabaseKey)
+                dateTime   = nowUtc - timedelta(days=daysAgo, hours=nowUtc.hour - hour)
+                timestamp  = int(dateTime.timestamp())
+                endpoint   = f'{owBaseEndpoint}/timemachine'
+                parameters = {'lat': lat, 'lon': lon, 'dt': timestamp, 'units': 'metric', 'appid': owApiKey}
+                data       = RFHelpers.FetchData(endpoint, parameters, supabaseUrl, supabaseKey)
                 for hour in data['data']: rows.append(RFHelpers.ParseHourlyData(hour, cityId, nowUtc))
 
-    df = pd.DataFrame(rows)
+    df             = pd.DataFrame(rows)
     df['DataType'] = 'Actual'
     return df
 
 def GetForecastsAndActuals(citiesDf, owApiKey, owBaseEndpoint, supabaseUrl, supabaseKey):
-    forecasts = GetForecast(citiesDf, owApiKey, owBaseEndpoint, supabaseUrl, supabaseKey)
-    actuals = GetHistorical(citiesDf, owApiKey, owBaseEndpoint, supabaseUrl, supabaseKey)
-    combinedData = pd.concat([actuals, forecasts], ignore_index=True)
+    forecasts            = GetForecast(citiesDf, owApiKey, owBaseEndpoint, supabaseUrl, supabaseKey)
+    actuals              = GetHistorical(citiesDf, owApiKey, owBaseEndpoint, supabaseUrl, supabaseKey)
+    combinedData         = pd.concat([actuals, forecasts], ignore_index=True)
     combinedData['CTId'] = combinedData['CTId'].astype(int)
     combinedData['WCId'] = combinedData['WCId'].astype(int)
 

@@ -10,8 +10,8 @@ logger = logging.getLogger(__name__)
 def GetCityTable(supaBaseUrl, supabaseKey):
     try:
         supabase: Client = create_client(supaBaseUrl, supabaseKey)
-        response = supabase.table('DimCity').select('"Id", "Latitude", "Longitude"').execute()        
-        df = pd.DataFrame(response.data)
+        response         = supabase.table('DimCity').select('"Id", "Latitude", "Longitude"').execute()        
+        df               = pd.DataFrame(response.data)
         return df
     
     except Exception as e:

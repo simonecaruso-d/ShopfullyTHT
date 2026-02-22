@@ -10,20 +10,20 @@ logger = logging.getLogger(__name__)
 def LogApiCallToSupabase(endpoint, supabaseUrl, supabaseKey, tableName='ApiUsageLog'):
     try:
         supabase: Client = create_client(supabaseUrl, supabaseKey)
-        now = datetime.now()
-        today = now.strftime("%Y-%m-%d")
-        updatedAt = now.isoformat()
-        endpointCorrect = endpoint.split('/')[-1]
+        now              = datetime.now()
+        today            = now.strftime("%Y-%m-%d")
+        updatedAt        = now.isoformat()
+        endpointCorrect  = endpoint.split('/')[-1]
         
-        todayRecord = supabase.table(tableName).select('*').eq('Date', today).execute()
+        todayRecord      = supabase.table(tableName).select('*').eq('Date', today).execute()
         
         if todayRecord.data:
             existingRecord = todayRecord.data[0]
-            totalCalls = existingRecord.get('TotalCalls', 0) + 1
-            endpoints = existingRecord.get('Endpoints', {}) if isinstance(existingRecord.get('Endpoints'), dict) else {}
+            totalCalls     = existingRecord.get('TotalCalls', 0) + 1
+            endpoints      = existingRecord.get('Endpoints', {}) if isinstance(existingRecord.get('Endpoints'), dict) else {}
             
             if endpointCorrect not in endpoints: endpoints[endpointCorrect] = 0
-            endpoints[endpointCorrect] += 1
+            endpoints[endpointCorrect]                                      += 1
             
             supabase.table(tableName).update({'TotalCalls': totalCalls, 'Endpoints': endpoints, 'UpdatedAt': updatedAt}).eq('Date', today).execute()
         else:
