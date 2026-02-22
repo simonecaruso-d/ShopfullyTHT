@@ -18,6 +18,7 @@ SupabaseKey = os.getenv('SUPABASE_KEY')
 # File Paths
 BaseDirectory = Path(__file__).resolve().parent
 LogPath = BaseDirectory.parent / 'log'
+LogPath.mkdir(parents=True, exist_ok=True)
 PipelineLogPath = LogPath / 'PipelineLog.txt'
 
 # Logging Configuration
