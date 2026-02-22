@@ -3,11 +3,13 @@ import logging
 import pandas as pd
 from supabase import create_client, Client
 
+import RetrieveFacts
+
 # Logging Configuration
 logger = logging.getLogger(__name__)
 
 # Functions | Supabase Retrieval
-def GetCityTable(supaBaseUrl, supabaseKey):
+def GetCityTable(supaBaseUrl=RetrieveFacts.SupaBaseUrl, supabaseKey=RetrieveFacts.SupabaseKey):
     try:
         supabase: Client = create_client(supaBaseUrl, supabaseKey)
         response = supabase.table('DimCity').select('"Id", "Latitude", "Longitude"').execute()        

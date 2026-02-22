@@ -1,3 +1,11 @@
+-- ApiUsageLog
+CREATE TABLE "ApiUsageLog" ("Id" BIGSERIAL PRIMARY KEY,
+                            "Date" DATE NOT NULL UNIQUE,
+                            "TotalCalls" INT NOT NULL DEFAULT 0,
+                            "Endpoints" JSONB NOT NULL DEFAULT '{}',
+                            "CreatedAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+                            "UpdatedAt" TIMESTAMP NOT NULL DEFAULT NOW());
+
 -- DimWeatherCondition
 CREATE TABLE "DimWeatherCondition" ("Id" INT PRIMARY KEY,
                                     "MainCondition" VARCHAR(100) NOT NULL,

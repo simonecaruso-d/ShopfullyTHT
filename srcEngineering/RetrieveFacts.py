@@ -8,8 +8,9 @@ import RFCallAPI
 import RFReadDB
 import RFWriteDB
 
-# Environment Variables
+# Endpoints & Environment Variables
 load_dotenv()
+OpenWeatherEndpoint = 'https://api.openweathermap.org/data/3.0/onecall'
 OpenWeatherApiKey = os.getenv('OPENWEATHER_API_KEY')
 SupaBaseUrl = os.getenv('SUPABASE_URL')
 SupabaseKey = os.getenv('SUPABASE_KEY')
@@ -24,10 +25,7 @@ PipelineLogPath = LogPath / 'PipelineLog.txt'
 logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(name)s | %(message)s', handlers=[logging.FileHandler(PipelineLogPath), logging.StreamHandler()])
 logger = logging.getLogger('RetrieveFactsPipeline')
 
-# Endpoints
-BaseEndpoint = 'https://api.openweathermap.org/data/3.0/onecall'
-
 # Run
-Cities = RFReadDB.GetCityTable(SupaBaseUrl, SupabaseKey)
-FactWeather = RFCallAPI.GetForecastsAndActuals(Cities, OpenWeatherApiKey, BaseEndpoint, UsageLogPath)
-RFWriteDB.WriteFactWeatherToDatabase(FactWeather, SupaBaseUrl, SupabaseKey)
+Cities = RFReadDB.GetCityTable()
+FactWeather = RFCallAPI.GetForecastsAndActuals(Cities)
+RFWriteDB.WriteFactWeatherToDatabase(FactWeather)
