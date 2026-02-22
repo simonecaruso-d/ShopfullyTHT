@@ -9,7 +9,9 @@ import RetrieveFacts
 logger = logging.getLogger(__name__)
 
 # Functions | Supabase Writing
-def WriteFactWeatherToDatabase(factWeatherDf, supabaseUrl=RetrieveFacts.SupaBaseUrl, supabaseKey=RetrieveFacts.SupaKey):
+def WriteFactWeatherToDatabase(factWeatherDf, supabaseUrl=None, supabaseKey=None):
+    if supabaseUrl is None: supabaseUrl = RetrieveFacts.SupaBaseUrl
+    if supabaseKey is None: supabaseKey = RetrieveFacts.SupaKey
     try:
         supabase: Client = create_client(supabaseUrl, supabaseKey)
         uniqueCombinations = factWeatherDf[['DataType', 'CTId', 'FullTimestamp']].drop_duplicates()

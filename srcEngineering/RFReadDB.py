@@ -9,7 +9,9 @@ import RetrieveFacts
 logger = logging.getLogger(__name__)
 
 # Functions | Supabase Retrieval
-def GetCityTable(supaBaseUrl=RetrieveFacts.SupaBaseUrl, supabaseKey=RetrieveFacts.SupabaseKey):
+def GetCityTable(supaBaseUrl=None, supabaseKey=None):
+    if supaBaseUrl is None: supaBaseUrl = RetrieveFacts.SupaBaseUrl
+    if supabaseKey is None: supabaseKey = RetrieveFacts.SupabaseKey
     try:
         supabase: Client = create_client(supaBaseUrl, supabaseKey)
         response = supabase.table('DimCity').select('"Id", "Latitude", "Longitude"').execute()        

@@ -41,7 +41,9 @@ def LogApiCall(endpoint, usageLogPath):
 
     return
 
-def LogApiCallToSupabase(endpoint, supabaseUrl=RetrieveFacts.SupaBaseUrl, supabaseKey=RetrieveFacts.SupaKey, tableName='ApiUsageLog'):
+def LogApiCallToSupabase(endpoint, supabaseUrl=None, supabaseKey=None, tableName='ApiUsageLog'):
+    if supabaseUrl is None: supabaseUrl = RetrieveFacts.SupaBaseUrl
+    if supabaseKey is None: supabaseKey = RetrieveFacts.SupaKey
     try:
         supabase: Client = create_client(supabaseUrl, supabaseKey)
         today = datetime.now().strftime("%Y-%m-%d")
