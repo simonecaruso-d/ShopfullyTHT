@@ -11,8 +11,8 @@ import RFApiUsageLog
 logger = logging.getLogger(__name__)
 
 # Functions | Helpers
-def FetchData(endpoint, parameters):
-    RFApiUsageLog.LogApiCallToSupabase(endpoint)
+def FetchData(endpoint, parameters, supabaseUrl, supabaseKey):
+    RFApiUsageLog.LogApiCallToSupabase(endpoint, supabaseUrl, supabaseKey)
     session = requests.Session()
     retry = Retry(total=3, backoff_factor=2, status_forcelist=[429, 500, 502, 503, 504])
     adapter = HTTPAdapter(max_retries=retry)

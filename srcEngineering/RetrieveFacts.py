@@ -27,5 +27,5 @@ logger = logging.getLogger('RetrieveFactsPipeline')
 
 # Run
 Cities = RFReadDB.GetCityTable(SupaBaseUrl, SupabaseKey)
-FactWeather = RFCallAPI.GetForecastsAndActuals(Cities, OpenWeatherApiKey, OpenWeatherEndpoint)
+FactWeather = RFCallAPI.GetForecastsAndActuals(Cities, OpenWeatherApiKey, OpenWeatherEndpoint, SupaBaseUrl, SupabaseKey)
 RFWriteDB.WriteFactWeatherToDatabase(FactWeather, SupaBaseUrl, SupabaseKey)

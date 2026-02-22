@@ -5,8 +5,6 @@ from pathlib import Path
 import logging
 from supabase import create_client, Client
 
-import RetrieveFacts
-
 # Logging Configuration
 logger = logging.getLogger(__name__)
 
@@ -41,9 +39,7 @@ def LogApiCall(endpoint, usageLogPath):
 
     return
 
-def LogApiCallToSupabase(endpoint, supabaseUrl=None, supabaseKey=None, tableName='ApiUsageLog'):
-    if supabaseUrl is None: supabaseUrl = RetrieveFacts.SupaBaseUrl
-    if supabaseKey is None: supabaseKey = RetrieveFacts.SupaKey
+def LogApiCallToSupabase(endpoint, supabaseUrl, supabaseKey, tableName='ApiUsageLog'):
     try:
         supabase: Client = create_client(supabaseUrl, supabaseKey)
         today = datetime.now().strftime("%Y-%m-%d")
