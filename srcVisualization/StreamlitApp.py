@@ -44,10 +44,6 @@ with Tab2:
     Mae, Mape       = SAMetrics.ComputeForecastAccuracy(AccuracyDf, FiltersAccuracy['Parameter'])
     SAStyling.RenderAccuracy(Mae, Mape, FiltersAccuracy['Parameter'])
 
-    st.markdown('<br><br>', unsafe_allow_html=True)
-    timeSeriesDf = SAMetrics.PrepareTimeSeriesComparisons(CurrentDf, FiltersAccuracy['Parameter'], FiltersAccuracy['City'])
-    SAStyling.RenderForecastChart(timeSeriesDf, FiltersAccuracy['Parameter'])
-
     if st.button('✨ Generate AI Insight', key='llm_button'):
         with st.spinner('Generating insight...'):
             LLMComment = SAMetrics.GenerateLLMComment(Mae, Mape, FiltersAccuracy['Parameter'], FiltersAccuracy['City'], OpenRouterApiKey)
