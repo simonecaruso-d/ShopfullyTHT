@@ -4,7 +4,7 @@ from supabase import create_client, Client
 import streamlit as st
 
 # Functions | Data Retrieval & Denormalization
-def GetSupabaseClient(supaBaseUrl, supabaseKey) -> Client:
+def GetSupabaseClient(supaBaseUrl, supabaseKey):
     return create_client(supaBaseUrl, supabaseKey)
 
 @st.cache_data(ttl=600)

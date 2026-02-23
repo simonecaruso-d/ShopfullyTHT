@@ -1,6 +1,5 @@
 # Environment Setting
 import pandas as pd
-import numpy as np
 
 # Functions | Metrics Calculation & Forecast Evaluation
 def FilterDf(df, cities, dataType, dateRange):
