@@ -1,6 +1,7 @@
 # Environment Setting
 from datetime import datetime, timezone
 import logging
+import math
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -40,3 +41,6 @@ def ParseHourlyData(hour, cityId, retrievalTime):
             'RainVolume': hour.get('rain').get('1h') if hour.get('rain') else None,
             'RetrievalTime': retrievalTime.replace(tzinfo=None, microsecond=0),
             'IsCurrent': True}
+
+def SanitizeRecords(record):
+    return {k: (None if isinstance(v, float) and (math.isnan(v) or math.isinf(v)) else v) for k, v in record.items()}

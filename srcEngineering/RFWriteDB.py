@@ -1,8 +1,11 @@
 # Environment Setting
 import logging
+import math
 import numpy as np
 from supabase import create_client, Client
 from tqdm import tqdm
+
+import RFHelpers
 
 # Logging Configuration
 logger = logging.getLogger(__name__)
@@ -19,10 +22,14 @@ def WriteFactWeatherToDatabase(factWeatherDf, supabaseUrl, supabaseKey):
         dataToInsert                  = factWeatherDf.copy()
         dataToInsert['FullTimestamp'] = dataToInsert['FullTimestamp'].astype(str)
         dataToInsert['RetrievalTime'] = dataToInsert['RetrievalTime'].astype(str)
+        dataToInsert                  = dataToInsert.replace([np.inf, -np.inf], np.nan)
         dataToInsert                  = dataToInsert.where(~dataToInsert.isna(), None)
-        dataToInsert                  = dataToInsert.replace([np.inf, -np.inf], None)
 
-        records   = dataToInsert.to_dict('records')
+        records   = [RFHelpers.SanitizeRecords(r) for r in dataToInsert.to_dict('records')]
+        # Temporary Debug
+        for record in records[:5]:
+            for k, v in record.items():
+                if isinstance(v, float) and (math.isnan(v) or math.isinf(v)): logger.warning(f'Valore problematico in colonna: {k} = {v}')
                 
         batchSize = 500
         for i in tqdm(range(0, len(records), batchSize), desc='Inserting new rows'):
