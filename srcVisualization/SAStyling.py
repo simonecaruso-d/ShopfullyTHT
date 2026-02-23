@@ -232,7 +232,7 @@ def RenderForecastChart(df, parameter):
         xaxis=dict(gridcolor='rgba(255,255,255,0.05)', zerolinecolor='rgba(255,255,255,0.05)'),
         yaxis=dict(gridcolor='rgba(255,255,255,0.05)', zerolinecolor='rgba(255,255,255,0.05)'),)
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, key='forecast_chart')
 
 # Functions | LLM
 def RenderLLMComment(comment: str):
