@@ -180,7 +180,7 @@ def RenderTable(df, title=None, height=300):
 
     st.markdown(f'{titleHtml}<div class="table-wrapper"><table class="styled-table"><thead><tr>{header}</tr></thead><tbody>{rows}</tbody></table></div>', unsafe_allow_html=True)
 
-# Functions | Render Forecast Accuracy
+# Functions | Accuracy Metrics
 def RenderAccuracy(mae, mape, parameter):
     units = {'Temperature': '°C', 'Felt Temperature': '°C', 'Humidity': '%', 'Clouds': '%', 'Wind Speed': 'm/s'}
     unit  = units.get(parameter, '')
@@ -211,7 +211,7 @@ def RenderAccuracy(mae, mape, parameter):
         </div>
     </div>""", unsafe_allow_html=True)
 
-# Functions | Render Time Series Comparison
+# Functions | Line Chart
 def RenderForecastChart(df, parameter):
     colors = {'Actual': 'rgba(67, 196, 244, 1)', 'Forecast': 'rgba(118, 15, 202, 1)'}
     glows  = {'Actual': 'rgba(67, 196, 244, 0.3)', 'Forecast': 'rgba(118, 15, 202, 0.3)'}
@@ -233,3 +233,18 @@ def RenderForecastChart(df, parameter):
         yaxis=dict(gridcolor='rgba(255,255,255,0.05)', zerolinecolor='rgba(255,255,255,0.05)'),)
 
     st.plotly_chart(fig, use_container_width=True)
+
+# Functions | LLM
+def RenderLLMComment(comment: str):
+    st.markdown("""<style>
+    .llm-box {border-radius: 14px; padding: 18px 24px; margin-top: 8px; margin-bottom: 8px; background-color: rgba(118, 15, 202, 0.07); border: 1px solid rgba(118, 15, 202, 0.35); box-shadow: 0 0 12px rgba(118, 15, 202, 0.2), 0 0 30px rgba(118, 15, 202, 0.05); transition: all 0.2s ease;}
+    .llm-box:hover {filter: brightness(1.2);}
+    .llm-header {font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(118, 15, 202, 0.9); margin-bottom: 10px;}
+    .llm-text {font-size: 14px; color: #c0c0c0; line-height: 1.6;}
+    </style>""", unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div class="llm-box">
+        <div class="llm-header">🤖 AI Insight</div>
+        <div class="llm-text">{comment}</div>
+    </div>""", unsafe_allow_html=True)

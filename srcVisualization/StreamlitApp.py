@@ -1,6 +1,6 @@
 # Environment Setting
 from dotenv import load_dotenv
-import os
+import pandas as pd
 import streamlit as st
 
 import SAStyling
@@ -13,8 +13,9 @@ ShopfullyLogoUrl = 'https://shopfully.com/wp-content/uploads/2025/02/Shopfully_A
 
 # Environment Variables
 load_dotenv()
-SupaBaseUrl = st.secrets['SUPABASE_URL']
-SupabaseKey = st.secrets['SUPABASE_KEY']
+SupaBaseUrl      = st.secrets['SUPABASE_URL']
+SupabaseKey      = st.secrets['SUPABASE_KEY']
+OpenRouterApiKey = st.secrets['OPENROUTER_API_KEY']
 
 # App
 SAStyling.TopBar(FlippLogoUrl, ShopfullyLogoUrl)
@@ -46,3 +47,8 @@ with Tab2:
     st.markdown('<br><br>', unsafe_allow_html=True)
     timeSeriesDf = SAMetrics.PrepareTimeSeriesComparisons(CurrentDf, FiltersAccuracy['Parameter'], FiltersAccuracy['City'])
     SAStyling.RenderForecastChart(timeSeriesDf, FiltersAccuracy['Parameter'])
+
+    if pd.notna(Mae) and pd.notna(Mape):
+        with st.spinner('Generating insight...'):
+            LLMComment = SAMetrics.GenerateLLMAccuracyComment(Mae, Mape, FiltersAccuracy['Parameter'], FiltersAccuracy['City'], OpenRouterApiKey)
+            SAStyling.RenderLLMComment(LLMComment)
