@@ -2,7 +2,7 @@
 from openai import OpenAI
 import streamlit as st
 
-def GenerateLLMComment(mae, mape, parameter, cities, orApiKey, model='openai/gpt-4o-mini'):
+def GenerateLLMComment(mae, mape, parameter, cities, orApiKey, model='qwen/qwen3-vl-30b-a3b-thinking'):
     citiesString = ', '.join(cities)
     
     systemPrompt = """You are a senior meteorological data analyst with expertise in forecast model evaluation. 
