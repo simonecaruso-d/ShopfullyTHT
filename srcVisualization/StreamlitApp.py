@@ -45,14 +45,11 @@ with Tab2:
     Mae, Mape       = SAMetrics.ComputeForecastAccuracy(AccuracyDf, FiltersAccuracy['Parameter'])
     SAStyling.RenderAccuracy(Mae, Mape, FiltersAccuracy['Parameter'])
 
+    st.markdown('<br>', unsafe_allow_html=True)
     if st.button('✨ Generate AI Insight', key='llm_button'):
         with st.spinner('Generating insight...'):
-            try:
-                LLMComment = SALlm.GenerateLLMComment(Mae, Mape, FiltersAccuracy['Parameter'], FiltersAccuracy['City'], OpenRouterApiKey)
-                SAStyling.RenderLLMComment(LLMComment)
-            except Exception as e:
-                st.error(f"LLM Error: {e}")
-
+            LLMComment = SALlm.GenerateLLMComment(Mae, Mape, FiltersAccuracy['Parameter'], FiltersAccuracy['City'], OpenRouterApiKey)
+            SAStyling.RenderLLMComment(LLMComment)
 
     st.markdown('<br><br>', unsafe_allow_html=True)
     timeSeriesDf = SAMetrics.PrepareTimeSeriesComparisons(CurrentDf, FiltersAccuracy['Parameter'], FiltersAccuracy['City'])
