@@ -1,5 +1,6 @@
 # Environment Setting
 import logging
+import numpy as np
 from supabase import create_client, Client
 from tqdm import tqdm
 
@@ -19,6 +20,7 @@ def WriteFactWeatherToDatabase(factWeatherDf, supabaseUrl, supabaseKey):
         dataToInsert['FullTimestamp'] = dataToInsert['FullTimestamp'].astype(str)
         dataToInsert['RetrievalTime'] = dataToInsert['RetrievalTime'].astype(str)
         dataToInsert                  = dataToInsert.where(~dataToInsert.isna(), None)
+        dataToInsert                  = dataToInsert.replace([np.inf, -np.inf], None)
 
         records   = dataToInsert.to_dict('records')
                 
