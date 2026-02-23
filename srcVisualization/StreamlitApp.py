@@ -13,8 +13,8 @@ ShopfullyLogoUrl = 'https://shopfully.com/wp-content/uploads/2025/02/Shopfully_A
 
 # Environment Variables
 load_dotenv()
-SupaBaseUrl = st.secrets('SUPABASE_URL')
-SupabaseKey = st.secrets('SUPABASE_KEY')
+SupaBaseUrl = st.secrets['SUPABASE_URL']
+SupabaseKey = st.secrets['SUPABASE_KEY']
 
 # App
 SAStyling.TopBar(FlippLogoUrl, ShopfullyLogoUrl)
