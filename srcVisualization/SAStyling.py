@@ -182,7 +182,7 @@ def RenderTable(df, title=None, height=300):
 
 # Functions | Accuracy Metrics
 def RenderAccuracy(mae, mape, parameter):
-    units = {'Temperature': '°C', 'Felt Temperature': '°C', 'Humidity': '%', 'Clouds': '%', 'Wind Speed': 'm/s'}
+    units = {'Temperature': '°C', 'FeltTemperature': '°C', 'Humidity': '%', 'Clouds': '%', 'WindSpeed': 'm/s'}
     unit  = units.get(parameter, '')
 
     if   mape < 25:  mapeColor = '100, 220, 160'
