@@ -2,7 +2,7 @@
 from openai import OpenAI
 import streamlit as st
 
-def GenerateLLMComment(mae, mape, parameter, cities, orApiKey, model='qwen/qwen3-vl-30b-a3b-thinking'):
+def GenerateLLMComment(mae, mape, parameter, cities, orApiKey, maxTokens=300, temperature=0.3, model='qwen/qwen3-vl-30b-a3b-thinking'):
     citiesString = ', '.join(cities)
     
     systemPrompt = """You are a senior meteorological data analyst with expertise in forecast model evaluation. 
@@ -17,5 +17,5 @@ def GenerateLLMComment(mae, mape, parameter, cities, orApiKey, model='qwen/qwen3
     userPrompt = f"Evaluate the forecast accuracy for the following context. Parameter: {parameter}, Cities monitored: {citiesString}, MAE: {mae}, MAPE: {mape}%. Deliver your insight."
 
     client = OpenAI(base_url='https://openrouter.ai/api/v1', api_key=orApiKey)
-    response = client.chat.completions.create(model=model, max_tokens=150, temperature=0.3, messages=[{'role': 'system', 'content': systemPrompt}, {'role': 'user',   'content': userPrompt}])
+    response = client.chat.completions.create(model=model, max_tokens=maxTokens, temperature=temperature, messages=[{'role': 'system', 'content': systemPrompt}, {'role': 'user',   'content': userPrompt}])
     return response.choices[0].message.content
