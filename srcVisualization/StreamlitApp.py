@@ -6,6 +6,7 @@ import streamlit as st
 import SAStyling
 import SAData
 import SAMetrics
+import SALlm
 
 # Image URLs
 FlippLogoUrl     = 'https://cdn.brandfetch.io/idjav1wjnv/w/1000/h/1000/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B'
@@ -47,7 +48,7 @@ with Tab2:
     if st.button('✨ Generate AI Insight', key='llm_button'):
         with st.spinner('Generating insight...'):
             try:
-                LLMComment = SAMetrics.GenerateLLMComment(Mae, Mape, FiltersAccuracy['Parameter'], FiltersAccuracy['City'], OpenRouterApiKey)
+                LLMComment = SALlm.GenerateLLMComment(Mae, Mape, FiltersAccuracy['Parameter'], FiltersAccuracy['City'], OpenRouterApiKey)
                 SAStyling.RenderLLMComment(LLMComment)
             except Exception as e:
                 st.error(f"LLM Error: {e}")
