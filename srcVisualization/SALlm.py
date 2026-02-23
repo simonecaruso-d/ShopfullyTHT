@@ -2,7 +2,7 @@
 from openai import OpenAI
 import streamlit as st
 
-def GenerateLLMAccuracyComment(mae, mape, parameter, cities, orApiKey):
+def GenerateLLMComment(mae, mape, parameter, cities, orApiKey):
     citiesString = ', '.join(cities)
     prompt = (
         f"""You are a data analyst commenting on weather forecast accuracy metrics for a dashboard.
