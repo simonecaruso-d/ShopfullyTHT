@@ -24,12 +24,7 @@ def WriteFactWeatherToDatabase(factWeatherDf, supabaseUrl, supabaseKey):
         dataToInsert['RetrievalTime'] = dataToInsert['RetrievalTime'].astype(str)
         dataToInsert                  = dataToInsert.replace([np.inf, -np.inf], np.nan)
         dataToInsert                  = dataToInsert.where(~dataToInsert.isna(), None)
-
         records   = [RFHelpers.SanitizeRecords(r) for r in dataToInsert.to_dict('records')]
-        # Temporary Debug
-        for record in records[:5]:
-            for k, v in record.items():
-                if isinstance(v, float) and (math.isnan(v) or math.isinf(v)): logger.warning(f'Valore problematico in colonna: {k} = {v}')
                 
         batchSize = 500
         for i in tqdm(range(0, len(records), batchSize), desc='Inserting new rows'):
