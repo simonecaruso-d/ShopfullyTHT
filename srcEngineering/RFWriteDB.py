@@ -24,7 +24,7 @@ def WriteFactWeatherToDatabase(factWeatherDf, supabaseUrl, supabaseKey):
         dataToInsert['RetrievalTime'] = dataToInsert['RetrievalTime'].astype(str)
         dataToInsert                  = dataToInsert.replace([np.inf, -np.inf], np.nan)
         dataToInsert                  = dataToInsert.where(~dataToInsert.isna(), None)
-        records   = [RFHelpers.SanitizeRecords(r) for r in dataToInsert.to_dict('records')]
+        records                       = [RFHelpers.SanitizeRecords(r) for r in dataToInsert.to_dict('records')]
                 
         batchSize = 500
         for i in tqdm(range(0, len(records), batchSize), desc='Inserting new rows'):
