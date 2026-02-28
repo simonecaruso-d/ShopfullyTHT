@@ -7,6 +7,7 @@ from pathlib import Path
 import RFCallAPI
 import RFReadDB
 import RFWriteDB
+import RFApiUsageLog
 
 # Endpoints & Environment Variables
 load_dotenv()
@@ -27,5 +28,6 @@ logger      = logging.getLogger('RetrieveFactsPipeline')
 
 # Run
 Cities      = RFReadDB.GetCityTable(SupaBaseUrl, SupabaseKey)
-FactWeather = RFCallAPI.GetForecastsAndActuals(Cities, OpenWeatherApiKey, OpenWeatherEndpoint, SupaBaseUrl, SupabaseKey)
+FactWeather = RFCallAPI.GetForecastsAndActuals(Cities, OpenWeatherApiKey, OpenWeatherEndpoint)
 RFWriteDB.WriteFactWeatherToDatabase(FactWeather, SupaBaseUrl, SupabaseKey)
+RFApiUsageLog.FlushApiCallBatch(SupaBaseUrl, SupabaseKey)
